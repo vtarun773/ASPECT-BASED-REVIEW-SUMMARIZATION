@@ -23,10 +23,17 @@ reviews = pd.read_csv('deceptive-opinion.csv')
 x = reviews['text']
 
 
-
+#A sentence tokenizer which uses an unsupervised algorithm to build a model for abbreviation words, collocations, 
+#and words that start sentences; and then uses that model to find sentence boundaries.
 def sentenceTokenizer(para):
 	tokenizer = nltk.tokenize.punkt.PunktSentenceTokenizer()
 	return tokenizer.tokenize(para)
+
+
+
+#POS Tagging (Parts of Speech Tagging) is a process to mark up the words in text format for a particular part of a speech based on its definition and context.
+#Input: Everything to permit us.
+#Output: [('Everything', NN),('to', TO), ('permit', VB), ('us', PRP)] 
 
 def posTag(text):
 	tagged_text_list = []
@@ -119,7 +126,7 @@ def opinionIdentification(tokenized_sentence, most_common_features,Hotel):
 			neg = False
 			sentence = sentence.lower()
 			if feature in sentence:
-				#sentence = unicode(sentence)
+				
 				sentence = nlp(sentence)
 				pwrds = pos_words(sentence, feature, 'ADJ')
 				
